@@ -1,0 +1,61 @@
+[project]
+name = "postgres-dupe-fixer"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Richard Schwab", email = "postgresdupefixe-8nnc9527bj@richardschwab.de"},
+]
+dependencies = ["psycopg[binary]>=3.2.3"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "AGPL-3.0-only"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.ruff]
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.12
+target-version = "py312"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+extend-ignore = [
+    "D",
+    "E501", # Handled by Black
+    "EM101",
+    "ERA001", # Prone to false positives
+    "FIX002",
+    "TRY002",
+    "TRY003",
+
+    # Deprecated rules
+    "ANN101",
+    "ANN102",
+]
+
+[tool.ruff.lint.pylint]
+# Keyword args usually don't cause problems, even if there are many.
+max-args = 20
