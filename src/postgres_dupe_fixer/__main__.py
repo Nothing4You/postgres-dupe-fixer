@@ -16,7 +16,7 @@ BROKEN_TABLE_PKEY = "id"
 BROKEN_TABLE_UNIQUE_COLUMN = "actor_id"
 BROKEN_TABLE_DUPLICATE_QUERY = """
 with duplicate_actor as (
-    select lower(actor_id) as actor_id from community group by lower(actor_id) having count(*) > 0 limit 1
+    select lower(actor_id) as actor_id from community group by lower(actor_id) having count(*) > 1 limit 1
 )
 select community.id as pkey, community.actor_id as unique_column
 from community
@@ -92,7 +92,7 @@ def get_duplicate_batch(
     cur.execute(BROKEN_TABLE_DUPLICATE_QUERY)
     rows = cur.fetchall()
 
-    return [(row[0], row[1]) for row in rows] + [(250_000, "test")]
+    return [(row[0], row[1]) for row in rows]
 
 
 def main() -> None:
