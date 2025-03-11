@@ -7,3 +7,7 @@ It should be easy to adjust for other tables if needed.
 Foreign key references are automatically detected to update all references pointing to the duplicate rows.
 
 To minimize the risk of data loss, all related changes are grouped in transactions and row counts in other tables are verified to ensure no rows are dropped from a cascaded deletion when the duplicate row is deleted.
+
+Unfortunately, this turned out to not be as simple as originally anticipated, as certain tables in Lemmy ended up having conflicts following this, which would have had to be resolved separately.
+
+This repo is now archived in case it might be useful as a reference for something else in the future.
